@@ -1,5 +1,5 @@
 /*!
- * get-form-data 1.0.0 - https://github.com/insin/get-form-data
+ * get-form-data 1.0.1 - https://github.com/insin/get-form-data
  * MIT Licensed
  */
 !function(e){if("object"==typeof exports&&"undefined"!=typeof module)module.exports=e();else if("function"==typeof define&&define.amd)define([],e);else{var f;"undefined"!=typeof window?f=window:"undefined"!=typeof global?f=global:"undefined"!=typeof self&&(f=self),f.getFormData=e()}}(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
@@ -32,7 +32,7 @@ var toString = Object.prototype.toString
  */
 function getFormData(form) {
   if (!form) {
-    throw new Error('A form is required by formElementData, was given form=' + form)
+    throw new Error('A form is required by getFormData, was given form=' + form)
   }
 
   var data = {}
@@ -75,10 +75,10 @@ function getFormData(form) {
  */
 function getNamedFormElementData(form, elementName) {
   if (!form) {
-    throw new Error('A form is required by getFieldData, but was given form=' + form)
+    throw new Error('A form is required by getNamedFormElementData, was given form=' + form)
   }
   if (!elementName) {
-    throw new Error('A form element name is required by getNamedFormElementData, but was given elementName=' + elementName)
+    throw new Error('A form element name is required by getNamedFormElementData, was given elementName=' + elementName)
   }
 
   var element = form.elements[elementName]

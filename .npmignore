@@ -3,4 +3,5 @@ test
 .gitignore
 .jshintrc
 .npmignore
+CHANGES.md
 gulpfile.js
