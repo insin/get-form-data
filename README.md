@@ -2,6 +2,11 @@
 
 Get a form's data or a named form element's data via `form.elements`.
 
+Data is retrieved in a format similar to request parameters which would be sent
+if the form was submitted, so this module is suitable for extracting form data
+in the client side of projects which implement ismorphic handling of form
+submissions.
+
 ## Install
 
 ### Node.js
@@ -94,5 +99,41 @@ console.log(JSON.stringify(sizes))
 ```
 ["M", "L"]
 ```
+
+## API
+
+### `getFormData(form: HTMLFormElement): Object<String, String|Array.<String>>`
+
+Extracts data from a `<form>`s `.elements` collection - in order to use
+`.elements`, form inputs must have `name` or `id` attributes. Since multiple
+inputs can't have the same `id` and a `name` allows an input to qualify as a
+successful control for form submission, `name` attributes are preferred and will
+be given priority if both are present.
+
+#### Data object
+
+Properties in the returned data object are mostly consistent with what would
+have been sent as request parameters if the form had been submitted:
+
+* All disabled inputs are ignored
+* Text inputs will always conribute a value, which will be `''` if they are
+  empty.
+* Checkbox inputs will only contribute a value if they are checked, in which
+  case their `value` attribute will be used.
+* Form elements which represent multiple values (select-multiple, or multiple
+  inputs with the same name) will only contribute a value if they have at least
+  one value to submit. Their values will always be held in an `Array`, even if
+  there is only one.
+
+An exception to this is that buttons are completely ignored, as it's only
+possible to determine which button counts as successful after it's been used to
+submit the form.
+
+### `getNamedFormElementData(form: HTMLFormElement, elementName: String): null|String|Array.<String>`
+
+Extracts data for a named element from a  `<form>`s `.elements` collection.
+
+This function is used by `getFormData()`, so the documentation for individual
+return values above also applies.
 
 ## MIT Licensed
