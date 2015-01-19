@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="UTF-8">
+  <title>get-form-data QUnit Tests</title>
+  <link rel="stylesheet" href="../node_modules/qunitjs/qunit/qunit.css">
+</head>
+<body>
+  <div id="qunit"></div>
+  <div id="qunit-fixture"></div>
+  <script src="../node_modules/qunitjs/qunit/qunit.js"></script>
+  <script src="../dist/get-form-data.js"></script>
+  <script src="index.js"></script>
+  <div>
+    <form id="testForm" autocomplete="off">
+      <!-- Individual inputs -->
+      <input type="hidden" name="hiddenInput" value="hiddenInput">
+      <input type="hidden" name="hiddenInputDisabled" value="hiddenInputDisabled" disabled>
+
+      <input type="text" name="textInput" value="textInput">
+      <input type="text" name="textInputDisabled" value="textInputDisabled" disabled>
+
+      <input type="checkbox" name="uncheckedCheckbox" value="uncheckedCheckbox">
+      <input type="checkbox" name="checkedCheckbox" value="checkedCheckbox" checked>
+
+      <textarea name="textarea">textarea</textarea>
+      <textarea name="textareaDisabled" disabled>textareaDisabled</textarea>
+
+      <!-- Multiple checkboxes -->
+      <input type="checkbox" name="multipleCheckbox" value="1">
+      <input type="checkbox" name="multipleCheckbox" value="2">
+      <input type="checkbox" name="multipleCheckbox" value="3">
+
+      <input type="checkbox" name="checkOneMultipleCheckbox" value="1">
+      <input type="checkbox" name="checkOneMultipleCheckbox" value="2">
+      <input type="checkbox" name="checkOneMultipleCheckbox" value="3" checked>
+
+      <input type="checkbox" name="checkTwoMultipleCheckbox" value="1" checked>
+      <input type="checkbox" name="checkTwoMultipleCheckbox" value="2">
+      <input type="checkbox" name="checkTwoMultipleCheckbox" value="3" checked>
+
+      <input type="checkbox" disabled name="disabledMultipleCheckbox" value="1" checked>
+      <input type="checkbox" disabled name="disabledMultipleCheckbox" value="2">
+      <input type="checkbox" disabled name="disabledMultipleCheckbox" value="3" checked>
+
+      <!-- Multiple radios -->
+      <input type="radio" name="uncheckedRadio" value="1">
+      <input type="radio" name="uncheckedRadio" value="2">
+
+      <input type="radio" name="checkedRadio" value="1">
+      <input type="radio" name="checkedRadio" value="2" checked>
+
+      <input type="radio" name="radioDisabled" disabled value="1">
+      <input type="radio" name="radioDisabled" disabled value="2" checked>
+
+      <!-- Selects -->
+      <select name="unselectedSelect">
+        <option value=""></option>
+        <option value="1">One</option>
+        <option value="2">Two</option>
+        <option value="3">Three</option>
+      </select>
+
+      <select name="selectedSelect">
+        <option value=""></option>
+        <option value="1">One</option>
+        <option value="2" selected>Two</option>
+        <option value="3">Three</option>
+      </select>
+
+      <select name="selectedDisabled" disabled>
+        <option value=""></option>
+        <option value="1">One</option>
+        <option value="2" selected>Two</option>
+        <option value="3">Three</option>
+      </select>
+
+      <!-- Multiple selects -->
+      <select name="unselectedSelectMultiple" multiple>
+        <option value="1">One</option>
+        <option value="2">Two</option>
+        <option value="3">Three</option>
+      </select>
+
+      <select name="selectOneSelectMultiple" multiple>
+        <option value="1">One</option>
+        <option value="2">Two</option>
+        <option value="3" selected>Three</option>
+      </select>
+
+      <select name="selectTwoSelectMultiple" multiple>
+        <option value="1" selected>One</option>
+        <option value="2">Two</option>
+        <option value="3" selected>Three</option>
+      </select>
+
+      <select name="selectMultipleDisabled" multiple disabled>
+        <option value="1" selected>One</option>
+        <option value="2">Two</option>
+        <option value="3" selected>Three</option>
+      </select>
+
+      <!-- Buttons (should not be included) -->
+      <input type="submit" name="inputSubmit" value="Submit">
+      <input type="button" name="inputButton" value="Button">
+      <button type="submit" name="buttonSubmitt">Submit</button>
+      <button type="button" name="buttonButton">Button</button>
+    </form>
+  </div>
+</body>
