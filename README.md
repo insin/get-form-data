@@ -1,6 +1,6 @@
 # get-form-data
 
-Get a form's data or a named form element's data via `form.elements`.
+Gets form data - or data for a named form element - via `form.elements`.
 
 Data is retrieved in a format similar to request parameters which would be sent
 if the form was submitted, so this module is suitable for extracting form data
