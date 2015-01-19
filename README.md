@@ -29,7 +29,7 @@ To get data for an entire form, use the `getFormData(form)` function:
 ```html
 <form id="productForm">
   ...
-  <Label>Product:</label>
+  <label>Product:</label>
   <select name="product">
     <option value="1" selected>T-shirt</option>
     <option value="2">Hat</option>
@@ -72,7 +72,7 @@ function, which is exposed as a proprety of `getFormData`:
 ```html
 <form id="tshirtForm">
   ...
-  <Label>Sizes:</label>
+  <label>Sizes:</label>
   <div class="checkboxes">
     <label><input type="checkbox" name="sizes" value="S"> S</label>
     <label><input type="checkbox" name="sizes" value="M" checked> M</label>
