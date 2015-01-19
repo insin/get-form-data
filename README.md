@@ -4,7 +4,7 @@ Gets form data - or data for a named form element - via `form.elements`.
 
 Data is retrieved in a format similar to request parameters which would be sent
 if the form was submitted, so this module is suitable for extracting form data
-in the client side of projects which implement ismorphic handling of form
+on the client side for projects which implement ismorphic handling of form
 submissions.
 
 ## Install
@@ -104,7 +104,7 @@ console.log(JSON.stringify(sizes))
 
 ### `getFormData(form: HTMLFormElement)`
 
-Extracts data from a `<form>`s `.elements` collection - in order to use
+Extracts data from a `<form>`'s `.elements` collection - in order to use
 `.elements`, form inputs must have `name` or `id` attributes. Since multiple
 inputs can't have the same `id` and a `name` allows an input to qualify as a
 successful control for form submission, `name` attributes are preferred and will
@@ -129,9 +129,9 @@ An exception to this is that buttons are completely ignored, as it's only
 possible to determine which button counts as successful after it's been used to
 submit the form.
 
-### `getNamedFormElementData(form: HTMLFormElement, elementName: String): `
+### `getNamedFormElementData(form: HTMLFormElement, elementName: String)`
 
-Extracts data for a named element from a  `<form>`s `.elements` collection.
+Extracts data for a named element from a  `<form>`'s `.elements` collection.
 
 #### Return type: `null|String|Array.<String>`
 
