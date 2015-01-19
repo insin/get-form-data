@@ -1,6 +1,3 @@
-QUnit.module('get-form-data')
-
-
 QUnit.test('getFormData', function() {
   var form = document.querySelector('#testForm')
   deepEqual(getFormData(form), {
@@ -30,4 +27,24 @@ QUnit.test('getNamedFormElementData', function() {
   deepEqual(getData(form, 'selectMultiple'), null, 'null for select multiple with nothing selected')
   deepEqual(getData(form, 'selectOneSelectMultiple'), ['3'], 'list for 1 selected in select multiple')
   deepEqual(getData(form, 'selectTwoSelectMultiple'), ['1', '3'], 'list for >1 selected in select multiple')
+})
+
+QUnit.module('README examples')
+
+QUnit.test('getFormData', function() {
+  var form = document.querySelector('#productForm')
+  var data = getFormData(form)
+  deepEqual(getFormData(form), {
+    product: "1"
+  , quantity: "9"
+  , shipping: 'express'
+  , tos: 'Y'
+  }, JSON.stringify(data))
+})
+
+QUnit.test('getNamedFormElementData', function() {
+  var getFieldData = getFormData.getNamedFormElementData
+  var form = document.querySelector('#tshirtForm')
+  var data = getFieldData(form, 'sizes')
+  deepEqual(getFieldData(form, 'sizes'), ['M', 'L'], JSON.stringify(data))
 })

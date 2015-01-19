@@ -10,7 +10,7 @@
   <script src="../node_modules/qunitjs/qunit/qunit.js"></script>
   <script src="../dist/get-form-data.js"></script>
   <script src="index.js"></script>
-  <div>
+  <div style="display: none;">
     <form id="testForm" autocomplete="off">
       <!-- Individual inputs -->
       <input type="hidden" name="hiddenInput" value="hiddenInput">
@@ -104,6 +104,42 @@
       <input type="button" name="inputButton" value="Button">
       <button type="submit" name="buttonSubmitt">Submit</button>
       <button type="button" name="buttonButton">Button</button>
+    </form>
+
+    <form id="productForm">
+      ...
+      <Label>Product:</label>
+      <select name="product">
+        <option value="1" selected>T-shirt</option>
+        <option value="2">Hat</option>
+        <option value="3">Shoes</option>
+      </select>
+
+      <label>Quantity:</label>
+      <input type="number" name="quantity" min="0" step="1" value="9">
+
+      <label>Express shipping</label>
+      <p>Do you want to use <a href="/shipping#express">Express Shipping</a>?</p>
+      <div class="radios">
+        <label><input type="radio" name="shipping" value="express" checked> Yes</label>
+        <label><input type="radio" name="shipping" value="regular"> No</label>
+      </div>
+
+      <label>Terms of Service:</label>
+      <p>I have read and agree to the <a href="/">Terms of Service</a>.</p>
+      <label class="checkbox"><input type="checkbox" name="tos" value="Y" checked> Yes</label>
+      ...
+    </form>
+
+    <form id="tshirtForm">
+      ...
+      <Label>Sizes:</label>
+      <div class="checkboxes">
+        <label><input type="checkbox" name="sizes" value="S"> S</label>
+        <label><input type="checkbox" name="sizes" value="M" checked> M</label>
+        <label><input type="checkbox" name="sizes" value="L" checked> L</label>
+      </div>
+      ...
     </form>
   </div>
 </body>
