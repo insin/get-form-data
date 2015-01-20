@@ -72,7 +72,7 @@ console.log(JSON.stringify(data))
 
 To get data for individual form elements (which may contain multiple form inputs
 with the same name), use the `getNamedFormElementData(form, elementName)`
-function, which is exposed as a proprety of `getFormData`:
+function, which is exposed as a property of `getFormData`:
 
 ```html
 <form id="tshirtForm">
@@ -116,7 +116,7 @@ Properties in the returned data object are mostly consistent with what would
 have been sent as request parameters if the form had been submitted:
 
 * All disabled inputs are ignored
-* Text inputs will always conribute a value, which will be `''` if they are
+* Text inputs will always contribute a value, which will be `''` if they are
   empty.
 * Checkbox inputs will only contribute a value if they are checked, in which
   case their `value` attribute will be used.
