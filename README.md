@@ -29,7 +29,7 @@ You can find it in the [/dist directory](https://github.com/insin/get-form-data/
 
 ### Getting form data
 
-To get data for an entire form, use the `getFormData(form)` function:
+To get data for an entire form, use the `getFormData()` function:
 
 ```html
 <form id="productForm">
@@ -71,8 +71,8 @@ console.log(JSON.stringify(data))
 ### Getting field data
 
 To get data for individual form elements (which may contain multiple form inputs
-with the same name), use the `getNamedFormElementData(form, elementName)`
-function, which is exposed as a property of `getFormData`:
+with the same name), use the `getNamedFormElementData()` function, which is
+exposed as a property of `getFormData`:
 
 ```html
 <form id="tshirtForm">
@@ -98,6 +98,33 @@ console.log(JSON.stringify(sizes))
 ```
 ```
 ["M", "L"]
+```
+
+### Trimming user input
+
+To trim user input, pass a `trim` option to `getFormData()` or
+`getNamedFormElementData()`:
+
+```html
+<form id="signupForm">
+  ...
+  <label>Username:</label>
+  <input type="text" name="username" value="AzureDiamond  ">
+
+  <label>Password:</label>
+  <input type="password" name="password" value=" hunter2 ">
+  ...
+</form>
+```
+```javascript
+var form = document.querySelector('#signupForm')
+
+var data = getFormData(form, {trim: true})
+
+console.log(JSON.stringify(data))
+```
+```
+{"username": "AzureDiamond", "password": "hunter2"}
 ```
 
 ## API

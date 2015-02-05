@@ -59,7 +59,7 @@ QUnit.test('trim option', function(t) {
   , password: 'hunter2 '
   , message: ' Hello '
   , tos: ' Y '
-  }, 'Untrimmed form data: ' + JSON.stringify(untrimmedData))
+  }, 'getFormData trims nothing by default')
 
   // A trim option can be passed to getFormData
   var trimmedData = getFormData(form, {trim: true})
@@ -68,11 +68,18 @@ QUnit.test('trim option', function(t) {
   , password: 'hunter2'
   , message: 'Hello'
   , tos: ' Y '
-  }, 'Trimmed form data: ' + JSON.stringify(trimmedData) + ' - only text entry inputs (or inputs which fall back to text entry) are trimmed')
+  }, 'getFormData only trims text inputs with {trim: true}')
 
   // A trim option can also be passed directly to getNamedFormElementData
-  t.equal(getFormData.getNamedFormElementData(form, 'username'), ' AzureDiamond', 'Untrimmed named element data')
-  t.equal(getFormData.getNamedFormElementData(form, 'username', {trim: true}), 'AzureDiamond', 'Trimmed named element data')
+  t.equal(getFormData.getNamedFormElementData(form, 'username'),
+          ' AzureDiamond',
+          'getNamedFormElementData trims nothing by default')
+  t.equal(getFormData.getNamedFormElementData(form, 'username', {trim: true}),
+          'AzureDiamond',
+          'getNamedFormElementData trims text inputs with {trim: true}')
+  t.equal(getFormData.getNamedFormElementData(form, 'tos', {trim: true}),
+          ' Y ',
+          'getNamedFormElementData doesn\'t trim non-text inputs with {trim: true}')
 })
 
 QUnit.module('README examples')
@@ -93,6 +100,15 @@ QUnit.test('getNamedFormElementData', function(t) {
   var form = document.querySelector('#tshirtForm')
   var data = getFieldData(form, 'sizes')
   t.deepEqual(getFieldData(form, 'sizes'), ['M', 'L'], 'Data: ' + JSON.stringify(data))
+})
+
+QUnit.test('trimming', function(t) {
+  var form = document.querySelector('#signupForm')
+  var data = getFormData(form, {trim: true})
+  t.deepEqual(data, {
+    username: 'AzureDiamond'
+  , password: 'hunter2'
+  }, 'Data: ' + JSON.stringify(data))
 })
 
 }()
