@@ -1,3 +1,5 @@
+# 1.1.0 / 2015-02-05
+
 Added: `trim` option for `getFormData()` and `getNamedFormElementData()`
 
 Fixed: ignoring of individial disabled inputs when multiple inputs have the same
