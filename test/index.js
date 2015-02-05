@@ -8,6 +8,7 @@ QUnit.test('getFormData', function(t) {
   , checkedCheckbox: 'checkedCheckbox'
   , checkedRadio: '2'
   , hiddenInput: 'hiddenInput'
+  , partiallyDisabledMultipleCheckbox: ['3']
   , selectedSelect: '2'
   , selectOneSelectMultiple: ['3']
   , selectTwoSelectMultiple: ['1', '3']
