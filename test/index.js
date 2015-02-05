@@ -1,3 +1,5 @@
+void function() { 'use strict';
+
 QUnit.test('getFormData', function(t) {
   var form = document.querySelector('#testForm')
   t.deepEqual(getFormData(form), {
@@ -47,14 +49,39 @@ QUnit.test('getNamedFormElementData', function(t) {
   )
 })
 
+QUnit.test('trim option', function(t) {
+  var form = document.querySelector('#trimForm')
+
+  var untrimmedData = getFormData(form)
+  t.deepEqual(untrimmedData, {
+    username: ' AzureDiamond'
+  , password: 'hunter2 '
+  , message: ' Hello '
+  , tos: ' Y '
+  }, 'Untrimmed form data: ' + JSON.stringify(untrimmedData))
+
+  // A trim option can be passed to getFormData
+  var trimmedData = getFormData(form, {trim: true})
+  t.deepEqual(trimmedData, {
+    username: 'AzureDiamond'
+  , password: 'hunter2'
+  , message: 'Hello'
+  , tos: ' Y '
+  }, 'Trimmed form data: ' + JSON.stringify(trimmedData) + ' - only text entry inputs (or inputs which fall back to text entry) are trimmed')
+
+  // A trim option can also be passed directly to getNamedFormElementData
+  t.equal(getFormData.getNamedFormElementData(form, 'username'), ' AzureDiamond', 'Untrimmed named element data')
+  t.equal(getFormData.getNamedFormElementData(form, 'username', {trim: true}), 'AzureDiamond', 'Trimmed named element data')
+})
+
 QUnit.module('README examples')
 
 QUnit.test('getFormData', function(t) {
   var form = document.querySelector('#productForm')
   var data = getFormData(form)
-  t.deepEqual(getFormData(form), {
-    product: "1"
-  , quantity: "9"
+  t.deepEqual(data, {
+    product: '1'
+  , quantity: '9'
   , shipping: 'express'
   , tos: 'Y'
   }, 'Data: ' + JSON.stringify(data))
@@ -66,3 +93,5 @@ QUnit.test('getNamedFormElementData', function(t) {
   var data = getFieldData(form, 'sizes')
   t.deepEqual(getFieldData(form, 'sizes'), ['M', 'L'], 'Data: ' + JSON.stringify(data))
 })
+
+}()

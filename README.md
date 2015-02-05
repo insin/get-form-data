@@ -102,13 +102,18 @@ console.log(JSON.stringify(sizes))
 
 ## API
 
-### `getFormData(form: HTMLFormElement)`
+### `getFormData(form: HTMLFormElement[, options: Object])`
 
 Extracts data from a `<form>`'s `.elements` collection - in order to use
 `.elements`, form inputs must have `name` or `id` attributes. Since multiple
 inputs can't have the same `id` and a `name` allows an input to qualify as a
 successful control for form submission, `name` attributes are preferred and will
 be given priority if both are present.
+
+The following options can be configured:
+
+* `trim: Boolean` (default: `false`) - if `true`, leading and trailing
+  whitespace will be trimmed from user input in text entry form inputs.
 
 #### Return type: `Object<String, String|Array.<String>>`
 
@@ -129,9 +134,11 @@ An exception to this is that buttons are completely ignored, as it's only
 possible to determine which button counts as successful after it's been used to
 submit the form.
 
-### `getNamedFormElementData(form: HTMLFormElement, elementName: String)`
+### `getNamedFormElementData(form: HTMLFormElement, elementName: String[, options: Object])`
 
 Extracts data for a named element from a  `<form>`'s `.elements` collection.
+
+Options are as documented for `getFormData`.
 
 #### Return type: `null|String|Array.<String>`
 
