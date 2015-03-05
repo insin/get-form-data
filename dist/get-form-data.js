@@ -1,5 +1,5 @@
 /*!
- * get-form-data 1.1.0 - https://github.com/insin/get-form-data
+ * get-form-data 1.2.0 - https://github.com/insin/get-form-data
  * MIT Licensed
  */
 !function(e){if("object"==typeof exports&&"undefined"!=typeof module)module.exports=e();else if("function"==typeof define&&define.amd)define([],e);else{var f;"undefined"!=typeof window?f=window:"undefined"!=typeof global?f=global:"undefined"!=typeof self&&(f=self),f.getFormData=e()}}(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
@@ -24,6 +24,7 @@ var CHECKED_INPUT_TYPES = {
 
 var TRIM_RE = /^\s+|\s+$/g
 
+var slice = Array.prototype.slice
 var toString = Object.prototype.toString
 
 /**
@@ -126,8 +127,8 @@ function getNamedFormElementData(form, elementName, options) {
 /**
  * @param {HTMLElement} element a form element.
  * @param {booleam} trim should values for text entry inputs be trimmed?
- * @return {(string|Array.<string>)} the element's submittable value(s), or null
- *   if it had none.
+ * @return {(string|Array.<string>|File|Array.<File>)} the element's submittable
+ *   value(s), or null if it had none.
  */
 function getFormElementValue(element, trim) {
   var value = null
@@ -136,8 +137,10 @@ function getFormElementValue(element, trim) {
     if (element.options.length) {
       value = element.options[element.selectedIndex].value
     }
+    return value
   }
-  else if (element.type === 'select-multiple') {
+
+  if (element.type === 'select-multiple') {
     value = []
     for (var i = 0, l = element.options.length; i < l; i++) {
       if (element.options[i].selected) {
@@ -147,8 +150,26 @@ function getFormElementValue(element, trim) {
     if (value.length === 0) {
       value = null
     }
+    return value
   }
-  else if (!CHECKED_INPUT_TYPES[element.type]) {
+
+  // If a file input doesn't have a files attribute, fall through to using its
+  // value attribute.
+  if (element.type === 'file' && 'files' in element) {
+    if (element.multiple) {
+      value = slice.call(element.files)
+      if (value.length === 0) {
+        value = null
+      }
+    }
+    else {
+      // Should be null if not present, according to the spec
+      value = element.files[0]
+    }
+    return value
+  }
+
+  if (!CHECKED_INPUT_TYPES[element.type]) {
     value = (trim ? element.value.replace(TRIM_RE, '') : element.value)
   }
   else if (element.checked) {

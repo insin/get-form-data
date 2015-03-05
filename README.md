@@ -127,6 +127,14 @@ console.log(JSON.stringify(data))
 {"username": "AzureDiamond", "password": "hunter2"}
 ```
 
+### File Inputs
+
+Where possible, data extracted from `<input type="file">` will be native
+[`File`](https://developer.mozilla.org/en-US/docs/Web/API/File) objects.
+
+If the `.files` property is not available, the `.value` property will be used to
+provide data instead.
+
 ## API
 
 ### `getFormData(form: HTMLFormElement[, options: Object])`
@@ -142,7 +150,7 @@ The following options can be configured:
 * `trim: Boolean` (default: `false`) - if `true`, leading and trailing
   whitespace will be trimmed from user input in text entry form inputs.
 
-#### Return type: `Object<String, String|Array.<String>>`
+#### Return type: `Object<String, String|Array.<String>|File|Array.<File>`
 
 Properties in the returned data object are mostly consistent with what would
 have been sent as request parameters if the form had been submitted:
@@ -153,9 +161,9 @@ have been sent as request parameters if the form had been submitted:
 * Checkbox inputs will only contribute a value if they are checked, in which
   case their `value` attribute will be used.
 * Form elements which represent multiple values (select-multiple, or multiple
-  inputs with the same name) will only contribute a value if they have at least
-  one value to submit. Their values will always be held in an `Array`, even if
-  there is only one.
+  inputs with the same name, file inputs with `multiple`) will only contribute a
+  value if they have at least one value to submit. Their values will always be
+  held in an `Array`, even if there is only one.
 
 An exception to this is that buttons are completely ignored, as it's only
 possible to determine which button counts as successful after it's been used to
@@ -167,13 +175,13 @@ Extracts data for a named element from a  `<form>`'s `.elements` collection.
 
 Options are as documented for `getFormData`.
 
-#### Return type: `null|String|Array.<String>`
+#### Return type: `null|String|Array.<String>|File|Array.<File>`
 
 This function is used by `getFormData()`, so the documentation for individual
 return values above also applies.
 
 `null` will be returned if the named element is non-existent, disabled, or
 shouldn't contribute a value (unchecked checkboxes, multiple selects with no
-selections).
+selections, file inputs with no selections).
 
 ## MIT Licensed
