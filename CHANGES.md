@@ -1,3 +1,8 @@
+# 1.2.1 / 2015-03-11
+
+Fixed: Ignore any `<fieldset>` elements which appear in `form.elements`
+[[sixsided](https://github.com/sixsided)]
+
 # 1.2.0 / 2015-03-05
 
 Changed: Return a `File` object for `<input type="file">` where supported, or a

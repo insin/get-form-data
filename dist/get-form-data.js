@@ -1,5 +1,5 @@
 /*!
- * get-form-data 1.2.0 - https://github.com/insin/get-form-data
+ * get-form-data 1.2.1 - https://github.com/insin/get-form-data
  * MIT Licensed
  */
 !function(e){if("object"==typeof exports&&"undefined"!=typeof module)module.exports=e();else if("function"==typeof define&&define.amd)define([],e);else{var f;"undefined"!=typeof window?f=window:"undefined"!=typeof global?f=global:"undefined"!=typeof self&&(f=self),f.getFormData=e()}}(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
@@ -11,10 +11,11 @@ var NODE_LIST_CLASSES = {
 , '[object RadioNodeList]': true
 }
 
-var BUTTON_INPUT_TYPES = {
+var IGNORED_INPUT_TYPES = {
   'button': true
 , 'reset': true
 , 'submit': true
+, 'fieldset': true
 }
 
 var CHECKED_INPUT_TYPES = {
@@ -50,7 +51,7 @@ function getFormData(form, options) {
   // Get unique submittable element names for the form
   for (var i = 0, l = form.elements.length; i < l; i++) {
     var element = form.elements[i]
-    if (BUTTON_INPUT_TYPES[element.type] || element.disabled) {
+    if (IGNORED_INPUT_TYPES[element.type] || element.disabled) {
       continue
     }
     elementName = element.name || element.id
