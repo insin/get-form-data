@@ -12,6 +12,9 @@
   <script src="index.js"></script>
   <div style="display: none;">
     <form id="testForm" autocomplete="off">
+      <!-- Inputs without a name or id should be ignored -->
+      <input value="noNameOrId">
+
       <!-- Individual inputs -->
       <input type="hidden" name="hiddenInput" value="hiddenInput">
       <input type="hidden" name="hiddenInputDisabled" value="hiddenInputDisabled" disabled>

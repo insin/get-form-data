@@ -48,6 +48,8 @@ QUnit.test('getNamedFormElementData', function(t) {
     /A form element name is required by getNamedFormElementData, was given elementName=undefined/,
     'Error if element name is not provided'
   )
+
+  t.equal(getData(form, ''), null, 'null if an empty string is given as element name')
 })
 
 QUnit.test('trim option', function(t) {
