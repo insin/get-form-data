@@ -1,7 +1,7 @@
 {
   "name": "get-form-data",
-  "version": "1.2.1",
-  "description": " Gets form data via form.elements",
+  "version": "1.2.2",
+  "description": "Gets form data via form.elements",
   "main": "./lib/index.js",
   "standalone": "getFormData",
   "homepage": "https://github.com/insin/get-form-data",

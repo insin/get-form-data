@@ -1,8 +1,8 @@
 /*!
- * get-form-data 1.2.1 - https://github.com/insin/get-form-data
+ * get-form-data 1.2.2 - https://github.com/insin/get-form-data
  * MIT Licensed
  */
-!function(e){if("object"==typeof exports&&"undefined"!=typeof module)module.exports=e();else if("function"==typeof define&&define.amd)define([],e);else{var f;"undefined"!=typeof window?f=window:"undefined"!=typeof global?f=global:"undefined"!=typeof self&&(f=self),f.getFormData=e()}}(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+(function(f){if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}g.getFormData = f()}})(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 'use strict';
 
 var NODE_LIST_CLASSES = {
@@ -55,7 +55,7 @@ function getFormData(form, options) {
       continue
     }
     elementName = element.name || element.id
-    if (!elementNameLookup[elementName]) {
+    if (elementName && !elementNameLookup[elementName]) {
       elementNames.push(elementName)
       elementNameLookup[elementName] = true
     }
@@ -85,7 +85,7 @@ function getNamedFormElementData(form, elementName, options) {
   if (!form) {
     throw new Error('A form is required by getNamedFormElementData, was given form=' + form)
   }
-  if (!elementName) {
+  if (!elementName && toString.call(elementName) !== '[object String]') {
     throw new Error('A form element name is required by getNamedFormElementData, was given elementName=' + elementName)
   }
 

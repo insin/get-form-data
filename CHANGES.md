@@ -1,3 +1,9 @@
+# 1.2.2 / 2015-04-27
+
+Fixed: Ignore form elements with empty names in `getFormData()`; don't throw on
+empty element names in `getNamedFormElementData()`
+[[#3](https://github.com/insin/get-form-data/issues/3)]
+
 # 1.2.1 / 2015-03-11
 
 Fixed: Ignore any `<fieldset>` elements which appear in `form.elements`
