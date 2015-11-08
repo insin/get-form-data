@@ -1,3 +1,7 @@
+# 1.2.3 / 2015-11-08
+
+Changed how the module is published to npm.
+
 # 1.2.2 / 2015-04-27
 
 Fixed: Ignore form elements with empty names in `getFormData()`; don't throw on
