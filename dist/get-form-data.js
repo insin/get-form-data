@@ -2,186 +2,245 @@
  * get-form-data 1.2.2 - https://github.com/insin/get-form-data
  * MIT Licensed
  */
-(function(f){if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}g.getFormData = f()}})(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-'use strict';
+(function webpackUniversalModuleDefinition(root, factory) {
+	if(typeof exports === 'object' && typeof module === 'object')
+		module.exports = factory();
+	else if(typeof define === 'function' && define.amd)
+		define([], factory);
+	else if(typeof exports === 'object')
+		exports["getFormData"] = factory();
+	else
+		root["getFormData"] = factory();
+})(this, function() {
+return /******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
 
-var NODE_LIST_CLASSES = {
-  '[object HTMLCollection]': true
-, '[object NodeList]': true
-, '[object RadioNodeList]': true
-}
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
 
-var IGNORED_INPUT_TYPES = {
-  'button': true
-, 'reset': true
-, 'submit': true
-, 'fieldset': true
-}
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId])
+/******/ 			return installedModules[moduleId].exports;
 
-var CHECKED_INPUT_TYPES = {
-  'checkbox': true
-, 'radio': true
-}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			exports: {},
+/******/ 			id: moduleId,
+/******/ 			loaded: false
+/******/ 		};
 
-var TRIM_RE = /^\s+|\s+$/g
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
 
-var slice = Array.prototype.slice
-var toString = Object.prototype.toString
+/******/ 		// Flag the module as loaded
+/******/ 		module.loaded = true;
 
-/**
- * @param {HTMLFormElement} form
- * @return {Object.<string,(string|Array.<string>)>} an object containing
- *   submittable value(s) held in the form's .elements collection, with
- *   properties named as per element names or ids.
- */
-function getFormData(form, options) {
-  if (!form) {
-    throw new Error('A form is required by getFormData, was given form=' + form)
-  }
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
 
-  if (!options) {
-    options = {trim: false}
-  }
 
-  var data = {}
-  var elementName
-  var elementNames = []
-  var elementNameLookup = {}
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
 
-  // Get unique submittable element names for the form
-  for (var i = 0, l = form.elements.length; i < l; i++) {
-    var element = form.elements[i]
-    if (IGNORED_INPUT_TYPES[element.type] || element.disabled) {
-      continue
-    }
-    elementName = element.name || element.id
-    if (elementName && !elementNameLookup[elementName]) {
-      elementNames.push(elementName)
-      elementNameLookup[elementName] = true
-    }
-  }
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
 
-  // Extract element data name-by-name for consistent handling of special cases
-  // around elements which contain multiple inputs.
-  for (i = 0, l = elementNames.length; i < l; i++) {
-    elementName = elementNames[i]
-    var value = getNamedFormElementData(form, elementName, options)
-    if (value != null) {
-      data[elementName] = value
-    }
-  }
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
 
-  return data
-}
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(0);
+/******/ })
+/************************************************************************/
+/******/ ([
+/* 0 */
+/***/ function(module, exports) {
 
-/**
- * @param {HTMLFormElement} form
- * @param {string} elementName
- * @return {(string|Array.<string>)} submittable value(s) in the form for a
- *   named element from its .elements collection, or null if there was no
- *   element with that name or the element had no submittable value(s).
- */
-function getNamedFormElementData(form, elementName, options) {
-  if (!form) {
-    throw new Error('A form is required by getNamedFormElementData, was given form=' + form)
-  }
-  if (!elementName && toString.call(elementName) !== '[object String]') {
-    throw new Error('A form element name is required by getNamedFormElementData, was given elementName=' + elementName)
-  }
+	'use strict';
 
-  var element = form.elements[elementName]
-  if (!element || element.disabled) {
-    return null
-  }
+	exports.__esModule = true;
+	var NODE_LIST_CLASSES = {
+	  '[object HTMLCollection]': true,
+	  '[object NodeList]': true,
+	  '[object RadioNodeList]': true
+	};
 
-  var trim = !!(options && options.trim)
+	var IGNORED_INPUT_TYPES = {
+	  'button': true,
+	  'reset': true,
+	  'submit': true,
+	  'fieldset': true
+	};
 
-  if (!NODE_LIST_CLASSES[toString.call(element)]) {
-    return getFormElementValue(element, trim)
-  }
+	var CHECKED_INPUT_TYPES = {
+	  'checkbox': true,
+	  'radio': true
+	};
 
-  // Deal with multiple form controls which have the same name
-  var data = []
-  var allRadios = true
-  for (var i = 0, l = element.length; i < l; i++) {
-    if (element[i].disabled) {
-      continue
-    }
-    if (allRadios && element[i].type !== 'radio') {
-      allRadios = false
-    }
-    var value = getFormElementValue(element[i], trim)
-    if (value != null) {
-      data = data.concat(value)
-    }
-  }
+	var TRIM_RE = /^\s+|\s+$/g;
 
-  // Special case for an element with multiple same-named inputs which were all
-  // radio buttons: if there was a selected value, only return the value.
-  if (allRadios && data.length === 1) {
-    return data[0]
-  }
+	var slice = Array.prototype.slice;
+	var toString = Object.prototype.toString;
 
-  return (data.length > 0 ? data : null)
-}
+	/**
+	 * @param {HTMLFormElement} form
+	 * @param {Object} options
+	 * @return {Object.<string,(string|Array.<string>)>} an object containing
+	 *   submittable value(s) held in the form's .elements collection, with
+	 *   properties named as per element names or ids.
+	 */
+	function getFormData(form) {
+	  var options = arguments.length <= 1 || arguments[1] === undefined ? { trim: false } : arguments[1];
 
-/**
- * @param {HTMLElement} element a form element.
- * @param {booleam} trim should values for text entry inputs be trimmed?
- * @return {(string|Array.<string>|File|Array.<File>)} the element's submittable
- *   value(s), or null if it had none.
- */
-function getFormElementValue(element, trim) {
-  var value = null
+	  if (!form) {
+	    throw new Error('A form is required by getFormData, was given form=' + form);
+	  }
 
-  if (element.type === 'select-one') {
-    if (element.options.length) {
-      value = element.options[element.selectedIndex].value
-    }
-    return value
-  }
+	  var data = {};
+	  var elementName = undefined;
+	  var elementNames = [];
+	  var elementNameLookup = {};
 
-  if (element.type === 'select-multiple') {
-    value = []
-    for (var i = 0, l = element.options.length; i < l; i++) {
-      if (element.options[i].selected) {
-        value.push(element.options[i].value)
-      }
-    }
-    if (value.length === 0) {
-      value = null
-    }
-    return value
-  }
+	  // Get unique submittable element names for the form
+	  for (var i = 0, l = form.elements.length; i < l; i++) {
+	    var element = form.elements[i];
+	    if (IGNORED_INPUT_TYPES[element.type] || element.disabled) {
+	      continue;
+	    }
+	    elementName = element.name || element.id;
+	    if (elementName && !elementNameLookup[elementName]) {
+	      elementNames.push(elementName);
+	      elementNameLookup[elementName] = true;
+	    }
+	  }
 
-  // If a file input doesn't have a files attribute, fall through to using its
-  // value attribute.
-  if (element.type === 'file' && 'files' in element) {
-    if (element.multiple) {
-      value = slice.call(element.files)
-      if (value.length === 0) {
-        value = null
-      }
-    }
-    else {
-      // Should be null if not present, according to the spec
-      value = element.files[0]
-    }
-    return value
-  }
+	  // Extract element data name-by-name for consistent handling of special cases
+	  // around elements which contain multiple inputs.
+	  for (var i = 0, l = elementNames.length; i < l; i++) {
+	    elementName = elementNames[i];
+	    var value = getNamedFormElementData(form, elementName, options);
+	    if (value != null) {
+	      data[elementName] = value;
+	    }
+	  }
 
-  if (!CHECKED_INPUT_TYPES[element.type]) {
-    value = (trim ? element.value.replace(TRIM_RE, '') : element.value)
-  }
-  else if (element.checked) {
-    value = element.value
-  }
+	  return data;
+	}
 
-  return value
-}
+	/**
+	 * @param {HTMLFormElement} form
+	 * @param {string} elementName
+	 * @param {Object} options
+	 * @return {(string|Array.<string>)} submittable value(s) in the form for a
+	 *   named element from its .elements collection, or null if there was no
+	 *   element with that name or the element had no submittable value(s).
+	 */
+	function getNamedFormElementData(form, elementName) {
+	  var options = arguments.length <= 2 || arguments[2] === undefined ? { trim: false } : arguments[2];
 
-getFormData.getNamedFormElementData = getNamedFormElementData
+	  if (!form) {
+	    throw new Error('A form is required by getNamedFormElementData, was given form=' + form);
+	  }
+	  if (!elementName && toString.call(elementName) !== '[object String]') {
+	    throw new Error('A form element name is required by getNamedFormElementData, was given elementName=' + elementName);
+	  }
 
-module.exports = getFormData
-},{}]},{},[1])(1)
+	  var element = form.elements[elementName];
+	  if (!element || element.disabled) {
+	    return null;
+	  }
+
+	  if (!NODE_LIST_CLASSES[toString.call(element)]) {
+	    return getFormElementValue(element, options.trim);
+	  }
+
+	  // Deal with multiple form controls which have the same name
+	  var data = [];
+	  var allRadios = true;
+	  for (var i = 0, l = element.length; i < l; i++) {
+	    if (element[i].disabled) {
+	      continue;
+	    }
+	    if (allRadios && element[i].type !== 'radio') {
+	      allRadios = false;
+	    }
+	    var value = getFormElementValue(element[i], options.trim);
+	    if (value != null) {
+	      data = data.concat(value);
+	    }
+	  }
+
+	  // Special case for an element with multiple same-named inputs which were all
+	  // radio buttons: if there was a selected value, only return the value.
+	  if (allRadios && data.length === 1) {
+	    return data[0];
+	  }
+
+	  return data.length > 0 ? data : null;
+	}
+
+	/**
+	 * @param {HTMLElement} element a form element.
+	 * @param {booleam} trim should values for text entry inputs be trimmed?
+	 * @return {(string|Array.<string>|File|Array.<File>)} the element's submittable
+	 *   value(s), or null if it had none.
+	 */
+	function getFormElementValue(element, trim) {
+	  var value = null;
+	  var type = element.type;
+
+	  if (type === 'select-one') {
+	    if (element.options.length) {
+	      value = element.options[element.selectedIndex].value;
+	    }
+	    return value;
+	  }
+
+	  if (type === 'select-multiple') {
+	    value = [];
+	    for (var i = 0, l = element.options.length; i < l; i++) {
+	      if (element.options[i].selected) {
+	        value.push(element.options[i].value);
+	      }
+	    }
+	    if (value.length === 0) {
+	      value = null;
+	    }
+	    return value;
+	  }
+
+	  // If a file input doesn't have a files attribute, fall through to using its
+	  // value attribute.
+	  if (type === 'file' && 'files' in element) {
+	    if (element.multiple) {
+	      value = slice.call(element.files);
+	      if (value.length === 0) {
+	        value = null;
+	      }
+	    } else {
+	      // Should be null if not present, according to the spec
+	      value = element.files[0];
+	    }
+	    return value;
+	  }
+
+	  if (!CHECKED_INPUT_TYPES[type]) {
+	    value = trim ? element.value.replace(TRIM_RE, '') : element.value;
+	  } else if (element.checked) {
+	    value = element.value;
+	  }
+
+	  return value;
+	}
+
+	getFormData.getNamedFormElementData = getNamedFormElementData;
+
+	exports['default'] = getFormData;
+	module.exports = exports['default'];
+
+/***/ }
+/******/ ])
 });
+;

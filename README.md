@@ -2,18 +2,11 @@
 
 Gets form data - or data for a named form element - via `form.elements`.
 
-Data is retrieved in a format similar to request parameters which would be sent
-if the form was submitted, so this module is suitable for extracting form data
-on the client side for projects which implement ismorphic handling of form
-submission.
+Data is retrieved in a format similar to request parameters which would be sent if the form was submitted, so this module is suitable for extracting form data on the client side for projects which implement ismorphic handling of form submission.
 
 ## Install
 
 ### Node.js
-
-get-form-data can be bundled for the client using an npm-compatible packaging
-system such as [Browserify](http://browserify.org/) or
-[webpack](http://webpack.github.io/).
 
 ```
 npm install get-form-data
@@ -21,9 +14,10 @@ npm install get-form-data
 
 ### Browser bundle
 
-The browser bundle exposes a global `getFormData` variable.
+Browser bundles export a global `getFormData` variable.
 
-You can find it in the [/dist directory](https://github.com/insin/get-form-data/tree/master/dist).
+* [get-form-data.js](https://npmcdn.com/get-form-data/dist/get-form-data.js) (development version)
+* [get-form-data.min.js](https://npmcdn.com/get-form-data/dist/get-form-data.min.js) (compressed production version)
 
 ## Usage
 
@@ -70,9 +64,7 @@ console.log(JSON.stringify(data))
 
 ### Getting field data
 
-To get data for individual form elements (which may contain multiple form inputs
-with the same name), use the `getNamedFormElementData()` function, which is
-exposed as a property of `getFormData`:
+To get data for individual form elements (which may contain multiple form inputs with the same name), use the `getNamedFormElementData()` function, which is exposed as a property of `getFormData`:
 
 ```html
 <form id="tshirtForm">
@@ -102,8 +94,7 @@ console.log(JSON.stringify(sizes))
 
 ### Trimming user input
 
-To trim user input, pass a `trim` option to `getFormData()` or
-`getNamedFormElementData()`:
+To trim user input, pass a `trim` option to `getFormData()` or `getNamedFormElementData()`:
 
 ```html
 <form id="signupForm">
@@ -132,42 +123,28 @@ console.log(JSON.stringify(data))
 Where possible, data extracted from `<input type="file">` will be native
 [`File`](https://developer.mozilla.org/en-US/docs/Web/API/File) objects.
 
-If the `.files` property is not available, the `.value` property will be used to
-provide data instead.
+If the `.files` property is not available, the `.value` property will be used to provide data instead.
 
 ## API
 
 ### `getFormData(form: HTMLFormElement[, options: Object])`
 
-Extracts data from a `<form>`'s `.elements` collection - in order to use
-`.elements`, form inputs must have `name` or `id` attributes. Since multiple
-inputs can't have the same `id` and a `name` allows an input to qualify as a
-successful control for form submission, `name` attributes are preferred and will
-be given priority if both are present.
+Extracts data from a `<form>`'s `.elements` collection - in order to use `.elements`, form inputs must have `name` or `id` attributes. Since multiple inputs can't have the same `id` and a `name` allows an input to qualify as a successful control for form submission, `name` attributes are preferred and will be given priority if both are present.
 
 The following options can be configured:
 
-* `trim: Boolean` (default: `false`) - if `true`, leading and trailing
-  whitespace will be trimmed from user input in text entry form inputs.
+* `trim: Boolean` (default: `false`) - if `true`, leading and trailing whitespace will be trimmed from user input in text entry form inputs.
 
 #### Return type: `Object<String, String|Array.<String>|File|Array.<File>`
 
-Properties in the returned data object are mostly consistent with what would
-have been sent as request parameters if the form had been submitted:
+Properties in the returned data object are mostly consistent with what would have been sent as request parameters if the form had been submitted:
 
 * All disabled inputs are ignored
-* Text inputs will always contribute a value, which will be `''` if they are
-  empty.
-* Checkbox inputs will only contribute a value if they are checked, in which
-  case their `value` attribute will be used.
-* Form elements which represent multiple values (select-multiple, or multiple
-  inputs with the same name, file inputs with `multiple`) will only contribute a
-  value if they have at least one value to submit. Their values will always be
-  held in an `Array`, even if there is only one.
+* Text inputs will always contribute a value, which will be `''` if they are empty.
+* Checkbox inputs will only contribute a value if they are checked, in which case their `value` attribute will be used.
+* Form elements which represent multiple values (select-multiple, or multiple inputs with the same name, file inputs with `multiple`) will only contribute a value if they have at least one value to submit. Their values will always be held in an `Array`, even if there is only one.
 
-An exception to this is that buttons are completely ignored, as it's only
-possible to determine which button counts as successful after it's been used to
-submit the form.
+An exception to this is that buttons are completely ignored, as it's only possible to determine which button counts as successful after it's been used to submit the form.
 
 ### `getNamedFormElementData(form: HTMLFormElement, elementName: String[, options: Object])`
 
@@ -177,11 +154,8 @@ Options are as documented for `getFormData`.
 
 #### Return type: `null|String|Array.<String>|File|Array.<File>`
 
-This function is used by `getFormData()`, so the documentation for individual
-return values above also applies.
+This function is used by `getFormData()`, so the documentation for individual return values above also applies.
 
-`null` will be returned if the named element is non-existent, disabled, or
-shouldn't contribute a value (unchecked checkboxes, multiple selects with no
-selections, file inputs with no selections).
+`null` will be returned if the named element is non-existent, disabled, or shouldn't contribute a value (unchecked checkboxes, multiple selects with no selections, file inputs with no selections).
 
 ## MIT Licensed
