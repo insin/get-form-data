@@ -1,5 +1,9 @@
 # get-form-data
 
+[![Travis][build-badge]][build]
+[![Codecov][coverage-badge]][coverage]
+[![npm package][npm-badge]][npm]
+
 Gets form data - or data for a named form element - via `form.elements`.
 
 Data is retrieved in a format similar to request parameters which would be sent if the form was submitted, so this module is suitable for extracting form data on the client side for projects which implement ismorphic handling of form submission.
@@ -159,3 +163,12 @@ This function is used by `getFormData()`, so the documentation for individual re
 `null` will be returned if the named element is non-existent, disabled, or shouldn't contribute a value (unchecked checkboxes, multiple selects with no selections, file inputs with no selections).
 
 ## MIT Licensed
+
+[build-badge]: https://img.shields.io/travis/insin/get-form-data/master.svg
+[build]: https://travis-ci.org/insin/get-form-data
+
+[coverage-badge]: https://img.shields.io/codecov/c/github/insin/get-form-data.svg
+[coverage]: https://codecov.io/github/insin/get-form-data
+
+[npm-badge]: https://img.shields.io/npm/v/get-form-data.svg
+[npm]: https://www.npmjs.org/package/get-form-data
