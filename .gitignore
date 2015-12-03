@@ -1,5 +1,6 @@
-coverage
-lib
-node_modules
+/coverage
+/demo/dist
+/lib
+/node_modules
+/umd
 npm-debug.log
-umd

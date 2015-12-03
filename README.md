@@ -1,8 +1,8 @@
 # get-form-data
 
 [![Travis][build-badge]][build]
-[![Codecov][coverage-badge]][coverage]
 [![npm package][npm-badge]][npm]
+[![Coveralls][coveralls-badge]][coveralls]
 
 Gets form data - or data for a named form element - via `form.elements`.
 
@@ -164,11 +164,11 @@ This function is used by `getFormData()`, so the documentation for individual re
 
 ## MIT Licensed
 
-[build-badge]: https://img.shields.io/travis/insin/get-form-data/master.svg
+[build-badge]: https://img.shields.io/travis/insin/get-form-data/master.svg?style=flat-square
 [build]: https://travis-ci.org/insin/get-form-data
 
-[coverage-badge]: https://img.shields.io/codecov/c/github/insin/get-form-data.svg
-[coverage]: https://codecov.io/github/insin/get-form-data
-
-[npm-badge]: https://img.shields.io/npm/v/get-form-data.svg
+[npm-badge]: https://img.shields.io/npm/v/get-form-data.svg?style=flat-square
 [npm]: https://www.npmjs.org/package/get-form-data
+
+[coveralls-badge]: https://img.shields.io/coveralls/insin/get-form-data/master.svg?style=flat-square
+[coveralls]: https://coveralls.io/github/insin/get-form-data
