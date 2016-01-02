@@ -9,7 +9,7 @@ module.exports = {
       require('karma-tap')
     ]
   },
-  // UMD build config
   umd: true,
-  global: 'getFormData'
+  global: 'getFormData',
+  jsNext: true
 }
