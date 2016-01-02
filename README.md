@@ -10,15 +10,11 @@ Data is retrieved in a format similar to request parameters which would be sent 
 
 ## Install
 
-### Node.js
-
 ```
 npm install get-form-data
 ```
 
-### Browser bundle
-
-Browser bundles export a global `getFormData` variable.
+Browser bundles area abailable, which export a global `getFormData` variable.
 
 * [get-form-data.js](https://npmcdn.com/get-form-data/umd/get-form-data.js) (development version)
 * [get-form-data.min.js](https://npmcdn.com/get-form-data/umd/get-form-data.min.js) (compressed production version)
