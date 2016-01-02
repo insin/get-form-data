@@ -4,11 +4,12 @@ const NODE_LIST_CLASSES = {
   '[object RadioNodeList]': true
 }
 
-const IGNORED_INPUT_TYPES = {
+// .type values for elements which can appear in .elements and should be ignored
+const IGNORED_ELEMENT_TYPES = {
   'button': true,
+  'fieldset': true,
   'reset': true,
-  'submit': true,
-  'fieldset': true
+  'submit': true
 }
 
 const CHECKED_INPUT_TYPES = {
@@ -41,7 +42,7 @@ function getFormData(form, options = {trim: false}) {
   // Get unique submittable element names for the form
   for (let i = 0, l = form.elements.length; i < l; i++) {
     let element = form.elements[i]
-    if (IGNORED_INPUT_TYPES[element.type] || element.disabled) {
+    if (IGNORED_ELEMENT_TYPES[element.type] || element.disabled) {
       continue
     }
     elementName = element.name || element.id
