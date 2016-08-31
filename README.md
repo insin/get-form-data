@@ -16,8 +16,8 @@ npm install get-form-data
 
 Browser bundles area abailable, which export a global `getFormData` variable.
 
-* [get-form-data.js](https://npmcdn.com/get-form-data/umd/get-form-data.js) (development version)
-* [get-form-data.min.js](https://npmcdn.com/get-form-data/umd/get-form-data.min.js) (compressed production version)
+* [get-form-data.js](https://unpkg.com/get-form-data/umd/get-form-data.js) (development version)
+* [get-form-data.min.js](https://unpkg.com/get-form-data/umd/get-form-data.min.js) (compressed production version)
 
 ## Usage
 
