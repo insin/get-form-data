@@ -101,7 +101,7 @@ test('README example - getFormData', t => {
   let data = getFormData(form)
   t.deepEqual(data, {
     product: '1',
-    quantity: '9',
+    quantity: 9,
     shipping: 'express',
     tos: 'Y'
   }, `Data: ${JSON.stringify(data)}`)

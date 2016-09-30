@@ -59,7 +59,7 @@ var data = getFormData(form)
 console.log(JSON.stringify(data))
 ```
 ```
-{"product": "1", "quantity": "9", "shipping": "express", "tos": "Y"}
+{"product": "1", "quantity": 9, "shipping": "express", "tos": "Y"}
 ```
 
 ### Getting field data
