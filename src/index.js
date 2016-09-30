@@ -161,7 +161,10 @@ function getFormElementValue(element, trim) {
     return value
   }
 
-  if (!CHECKED_INPUT_TYPES[type]) {
+  if (type === 'number') {
+    value = parseInt(element.value, 10)
+  }
+  else if (!CHECKED_INPUT_TYPES[type]) {
     value = (trim ? element.value.replace(TRIM_RE, '') : element.value)
   }
   else if (element.checked) {
