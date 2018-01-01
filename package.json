@@ -3,33 +3,34 @@
   "version": "1.2.5",
   "description": "Gets form data via form.elements",
   "main": "lib/index.js",
-  "jsnext:main": "es6/index.js",
+  "module": "es/index.js",
   "homepage": "https://github.com/insin/get-form-data",
   "license": "MIT",
   "author": "Jonny Buchanan <jonathan.buchanan@gmail.com>",
   "scripts": {
     "build": "npm run lint && nwb test",
     "lint": "eslint src test",
-    "test": "nwb build && nwb test"
+    "test": "nwb build && nwb test",
+    "test:watch": "nwb test --server"
   },
   "files": [
-    "es6",
+    "es",
     "lib",
     "umd"
   ],
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
-    "eslint-config-jonnybuchanan": "2.0.x",
-    "karma-tap": "1.0.3",
-    "nwb": "0.6.x",
-    "tape": "4.4.0"
+    "eslint-config-jonnybuchanan": "5.0.x",
+    "karma-tap": "3.1.1",
+    "nwb": "0.20.x",
+    "tape": "4.8.0"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/insin/get-form-data.git"
   },
   "keywords": [
+    "data",
     "form",
     "forms"
   ]

@@ -1,6 +1,6 @@
 import test from 'tape'
 
-import getFormData, {getNamedFormElementData as getFieldData} from 'src/index'
+import getFormData, {getFieldData} from 'src/index'
 import fixture from './fixture'
 
 document.body.innerHTML = fixture
@@ -32,7 +32,7 @@ test('getFormData', t => {
   )
 })
 
-test('getNamedFormElementData', t => {
+test('getFieldData', t => {
   t.plan(10)
 
   let form = document.querySelector('#testForm')
@@ -49,13 +49,13 @@ test('getNamedFormElementData', t => {
 
   t.throws(
     () => getFieldData(),
-    /A form is required by getNamedFormElementData, was given form=undefined/,
+    /A form is required by getFieldData, was given form=undefined/,
     'Error if form is not provided'
   )
 
   t.throws(
     () => getFieldData(form),
-    /A form element name is required by getNamedFormElementData, was given elementName=undefined/,
+    /A field name is required by getFieldData, was given fieldName=undefined/,
     'Error if element name is not provided'
   )
 
@@ -83,16 +83,16 @@ test('trim option', t => {
     tos: ' Y '
   }, 'getFormData only trims text inputs with {trim: true}')
 
-  // A trim option can also be passed directly to getNamedFormElementData
-  t.equal(getFormData.getNamedFormElementData(form, 'username'),
+  // A trim option can also be passed directly to getFieldData
+  t.equal(getFormData.getFieldData(form, 'username'),
           ' AzureDiamond',
-          'getNamedFormElementData trims nothing by default')
-  t.equal(getFormData.getNamedFormElementData(form, 'username', {trim: true}),
+          'getFieldData trims nothing by default')
+  t.equal(getFormData.getFieldData(form, 'username', {trim: true}),
           'AzureDiamond',
-          'getNamedFormElementData trims text inputs with {trim: true}')
-  t.equal(getFormData.getNamedFormElementData(form, 'tos', {trim: true}),
+          'getFieldData trims text inputs with {trim: true}')
+  t.equal(getFormData.getFieldData(form, 'tos', {trim: true}),
           ' Y ',
-          'getNamedFormElementData doesn\'t trim non-text inputs with {trim: true}')
+          'getFieldData doesn\'t trim non-text inputs with {trim: true}')
 })
 
 test('README example - getFormData', t => {
@@ -107,7 +107,7 @@ test('README example - getFormData', t => {
   }, `Data: ${JSON.stringify(data)}`)
 })
 
-test('README example - getNamedFormElementData', t => {
+test('README example - getFieldData', t => {
   t.plan(1)
   let form = document.querySelector('#tshirtForm')
   let data = getFieldData(form, 'sizes')

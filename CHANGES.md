@@ -1,3 +1,8 @@
+
+**Breaking:** Renamed `getNamedFormElementData()` to `getFieldData()`.
+
+The ES modules build now uses a named export for `getFieldData()`.
+
 # 1.2.5 / 2016-01-02
 
 Added ES6 modules build.

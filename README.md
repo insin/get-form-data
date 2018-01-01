@@ -4,9 +4,9 @@
 [![npm package][npm-badge]][npm]
 [![Coveralls][coveralls-badge]][coveralls]
 
-Gets form data - or data for a named form element - via `form.elements`.
+Gets form data - or data for a named form field - via `form.elements`.
 
-Data is retrieved in a format similar to request parameters which would be sent if the form was submitted, so this module is suitable for extracting form data on the client side for projects which implement ismorphic handling of form submission.
+Data is retrieved in a format similar to request parameters which would be sent if the form was submitted, so this module is suitable for extracting form data on the client side for projects which implement isomorphic handling of form submission.
 
 ## Install
 
@@ -14,10 +14,10 @@ Data is retrieved in a format similar to request parameters which would be sent 
 npm install get-form-data
 ```
 
-Browser bundles area abailable, which export a global `getFormData` variable.
+Browser bundles area available, which export a global `getFormData` function.
 
-* [get-form-data.js](https://npmcdn.com/get-form-data/umd/get-form-data.js) (development version)
-* [get-form-data.min.js](https://npmcdn.com/get-form-data/umd/get-form-data.min.js) (compressed production version)
+* [get-form-data.js](https://unpkg.com/get-form-data/umd/get-form-data.js) (development version)
+* [get-form-data.min.js](https://unpkg.com/get-form-data/umd/get-form-data.min.js) (compressed production version)
 
 ## Usage
 
@@ -58,13 +58,13 @@ var data = getFormData(form)
 
 console.log(JSON.stringify(data))
 ```
-```
+```json
 {"product": "1", "quantity": "9", "shipping": "express", "tos": "Y"}
 ```
 
 ### Getting field data
 
-To get data for individual form elements (which may contain multiple form inputs with the same name), use the `getNamedFormElementData()` function, which is exposed as a property of `getFormData`:
+To get data for individual form fields (which may contain multiple form inputs with the same name), use the `getFieldData()` function, which is exposed as a property of `getFormData`:
 
 ```html
 <form id="tshirtForm">
@@ -79,12 +79,9 @@ To get data for individual form elements (which may contain multiple form inputs
 </form>
 ```
 ```javascript
-// You probably want to alias the function :)
-var getFieldData = getFormData.getNamedFormElementData
-
 var form = document.querySelector('#tshirtForm')
 
-var sizes = getFieldData(form, 'sizes')
+var sizes = getFormData.getFieldData(form, 'sizes')
 
 console.log(JSON.stringify(sizes))
 ```
@@ -94,7 +91,7 @@ console.log(JSON.stringify(sizes))
 
 ### Trimming user input
 
-To trim user input, pass a `trim` option to `getFormData()` or `getNamedFormElementData()`:
+To trim user input, pass a `trim` option to `getFormData()` or `getFieldData()`:
 
 ```html
 <form id="signupForm">
@@ -146,9 +143,11 @@ Properties in the returned data object are mostly consistent with what would hav
 
 An exception to this is that buttons are completely ignored, as it's only possible to determine which button counts as successful after it's been used to submit the form.
 
-### `getNamedFormElementData(form: HTMLFormElement, elementName: String[, options: Object])`
+### `getFieldData(form: HTMLFormElement, fieldName: String[, options: Object])`
 
-Extracts data for a named element from a  `<form>`'s `.elements` collection.
+> `getFieldData()` is a named export when using ES modules, otherwise it's also available as `getFormData.getFieldData()`
+
+Extracts data for a named field from a  `<form>`'s `.elements` collection.
 
 Options are as documented for `getFormData`.
 
@@ -156,7 +155,7 @@ Options are as documented for `getFormData`.
 
 This function is used by `getFormData()`, so the documentation for individual return values above also applies.
 
-`null` will be returned if the named element is non-existent, disabled, or shouldn't contribute a value (unchecked checkboxes, multiple selects with no selections, file inputs with no selections).
+`null` will be returned if the field is non-existent, disabled, or shouldn't contribute a value (e.g. unchecked checkboxes, multiple selects with no selections, file inputs with no selections).
 
 ## MIT Licensed
 

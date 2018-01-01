@@ -29,7 +29,7 @@ const {toString} = Object.prototype
  *   submittable value(s) held in the form's .elements collection, with
  *   properties named as per element names or ids.
  */
-function getFormData(form, options = {trim: false}) {
+export default function getFormData(form, options = {trim: false}) {
   if (!form) {
     throw new Error(`A form is required by getFormData, was given form=${form}`)
   }
@@ -56,7 +56,7 @@ function getFormData(form, options = {trim: false}) {
   // around elements which contain multiple inputs.
   for (let i = 0, l = elementNames.length; i < l; i++) {
     elementName = elementNames[i]
-    let value = getNamedFormElementData(form, elementName, options)
+    let value = getFieldData(form, elementName, options)
     if (value != null) {
       data[elementName] = value
     }
@@ -67,21 +67,21 @@ function getFormData(form, options = {trim: false}) {
 
 /**
  * @param {HTMLFormElement} form
- * @param {string} elementName
+ * @param {string} fieldName
  * @param {Object} options
  * @return {(string|Array.<string>)} submittable value(s) in the form for a
  *   named element from its .elements collection, or null if there was no
  *   element with that name or the element had no submittable value(s).
  */
-function getNamedFormElementData(form, elementName, options = {trim: false}) {
+export function getFieldData(form, fieldName, options = {trim: false}) {
   if (!form) {
-    throw new Error(`A form is required by getNamedFormElementData, was given form=${form}`)
+    throw new Error(`A form is required by getFieldData, was given form=${form}`)
   }
-  if (!elementName && toString.call(elementName) !== '[object String]') {
-    throw new Error(`A form element name is required by getNamedFormElementData, was given elementName=${elementName}`)
+  if (!fieldName && toString.call(fieldName) !== '[object String]') {
+    throw new Error(`A field name is required by getFieldData, was given fieldName=${fieldName}`)
   }
 
-  let element = form.elements[elementName]
+  let element = form.elements[fieldName]
   if (!element || element.disabled) {
     return null
   }
@@ -171,6 +171,5 @@ function getFormElementValue(element, trim) {
   return value
 }
 
-getFormData.getNamedFormElementData = getNamedFormElementData
-
-export default getFormData
+// For UMD build access to getFieldData
+getFormData.getFieldData = getFieldData
