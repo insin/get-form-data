@@ -36,7 +36,7 @@ list of `File` objects if it uses `multiple`.
 
 Added: `trim` option for `getFormData()` and `getNamedFormElementData()`.
 
-Fixed: ignoring of individial disabled inputs when multiple inputs have the same
+Fixed: ignoring of individual disabled inputs when multiple inputs have the same
 name.
 
 # 1.0.1 / 2015-01-19
