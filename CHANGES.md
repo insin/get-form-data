@@ -1,3 +1,4 @@
+# 2.0.0 / 2018-01-02
 
 **Breaking:** Renamed `getNamedFormElementData()` to `getFieldData()`.
 
