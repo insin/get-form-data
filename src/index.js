@@ -24,8 +24,8 @@ const {toString} = Object.prototype
 
 /**
  * @param {HTMLFormElement} form
- * @param {Object} options
- * @return {Object.<string,(string|Array.<string>)>} an object containing
+ * @param {Object} [options]
+ * @return {Object.<string,boolean|string|string[]>} an object containing
  *   submittable value(s) held in the form's .elements collection, with
  *   properties named as per element names or ids.
  */
@@ -74,10 +74,10 @@ export default function getFormData(form, options) {
 /**
  * @param {HTMLFormElement} form
  * @param {string} fieldName
- * @param {Object} options
- * @return {(string|Array.<string>)} submittable value(s) in the form for a
- *   named element from its .elements collection, or null if there was no
- *   element with that name or the element had no submittable value(s).
+ * @param {Object} [options]
+ * @return {?(boolean|string|string[]|File|File[])} submittable value(s) in the
+ *   form for a  named element from its .elements collection, or null if there
+ *   was no element with that name, or the element had no submittable value(s).
  */
 export function getFieldData(form, fieldName, options) {
   if (!form) {
@@ -129,8 +129,8 @@ export function getFieldData(form, fieldName, options) {
 
 /**
  * @param {HTMLElement} element a form element.
- * @param {boolean} trim should values for text entry inputs be trimmed?
- * @return {(string|Array.<string>|File|Array.<File>)} the element's submittable
+ * @param {boolean} [trim] should values for text entry inputs be trimmed?
+ * @return {?(boolean|string|string[]|File|File[])} the element's submittable
  *   value(s), or null if it had none.
  */
 function getFormElementValue(element, trim) {
