@@ -143,7 +143,7 @@ export default `<form id="testForm" autocomplete="off">
 
   <label>Terms of Service:</label>
   <p>I have read and agree to the <a href="/">Terms of Service</a>.</p>
-  <label class="checkbox"><input type="checkbox" name="tos" value="Y" checked> Yes</label>
+  <label class="checkbox"><input type="checkbox" name="tos" checked> Yes</label>
   ...
 </form>
 

@@ -1,3 +1,7 @@
+**Breaking:** Checkboxes without a `value` attribute will now be `true` rather than defaulting to `'on'`.
+
+Added: `includeDisabled` option for `getFormData()` and `getFieldData()`.
+
 # 2.0.0 / 2018-01-02
 
 **Breaking:** Renamed `getNamedFormElementData()` to `getFieldData()`.

@@ -47,19 +47,19 @@ To get data for an entire form, use the `getFormData()` function:
 
   <label>Terms of Service:</label>
   <p>I have read and agree to the <a href="/">Terms of Service</a>.</p>
-  <label class="checkbox"><input type="checkbox" name="tos" value="Y" checked> Yes</label>
+  <label class="checkbox"><input type="checkbox" name="tos" checked> Yes</label>
   ...
 </form>
 ```
 ```javascript
-var form = document.querySelector('#productForm')
+let form = document.querySelector('#productForm')
 
-var data = getFormData(form)
+let data = getFormData(form)
 
 console.log(JSON.stringify(data))
 ```
 ```json
-{"product": "1", "quantity": "9", "shipping": "express", "tos": "Y"}
+{"product": "1", "quantity": "9", "shipping": "express", "tos": true}
 ```
 
 ### Getting field data
@@ -79,9 +79,9 @@ To get data for individual form fields (which may contain multiple form inputs w
 </form>
 ```
 ```javascript
-var form = document.querySelector('#tshirtForm')
+let form = document.querySelector('#tshirtForm')
 
-var sizes = getFormData.getFieldData(form, 'sizes')
+let sizes = getFormData.getFieldData(form, 'sizes')
 
 console.log(JSON.stringify(sizes))
 ```
@@ -91,7 +91,7 @@ console.log(JSON.stringify(sizes))
 
 ### Trimming user input
 
-To trim user input, pass a `trim` option to `getFormData()` or `getFieldData()`:
+To trim user input, pass a `trim: true` option to `getFormData()` or `getFieldData()`:
 
 ```html
 <form id="signupForm">
@@ -105,14 +105,22 @@ To trim user input, pass a `trim` option to `getFormData()` or `getFieldData()`:
 </form>
 ```
 ```javascript
-var form = document.querySelector('#signupForm')
+let form = document.querySelector('#signupForm')
 
-var data = getFormData(form, {trim: true})
+let data = getFormData(form, {trim: true})
 
 console.log(JSON.stringify(data))
 ```
 ```
 {"username": "AzureDiamond", "password": "hunter2"}
+```
+
+### Including disabled inputs
+
+Disabled inputs are ignored by default; to include their data, pass an `includeDisabled: true` option to `getFormData()` or `getFieldData()`.
+
+```javascript
+let data = getFormData(form, {includeDisabled: true})
 ```
 
 ### File Inputs
@@ -131,17 +139,21 @@ Extracts data from a `<form>`'s `.elements` collection - in order to use `.eleme
 The following options can be configured:
 
 * `trim: Boolean` (default: `false`) - if `true`, leading and trailing whitespace will be trimmed from user input in text entry form inputs.
+* `includeDisabled: Boolean` (default: `false`) - if `true`, disabled inputs will not be ignored.
 
-#### Return type: `Object<String, String|Array.<String>|File|Array.<File>`
+#### Return type: `Object<string, boolean | string | string[] | File | File[]>`
 
 Properties in the returned data object are mostly consistent with what would have been sent as request parameters if the form had been submitted:
 
-* All disabled inputs are ignored
+* Disabled inputs are ignored by default.
 * Text inputs will always contribute a value, which will be `''` if they are empty.
 * Checkbox inputs will only contribute a value if they are checked, in which case their `value` attribute will be used.
 * Form elements which represent multiple values (select-multiple, or multiple inputs with the same name, file inputs with `multiple`) will only contribute a value if they have at least one value to submit. Their values will always be held in an `Array`, even if there is only one.
 
-An exception to this is that buttons are completely ignored, as it's only possible to determine which button counts as successful after it's been used to submit the form.
+Exceptions to this are:
+
+* If a checked checkbox doesn't have a `value` attribute, its value will be `true`. Normally it would default to `'on'` when submitted, but this isn't as useful a default on the client.
+* Buttons are completely ignored, as it's only possible to determine which button counts as successful after it's been used to submit the form.
 
 ### `getFieldData(form: HTMLFormElement, fieldName: String[, options: Object])`
 
@@ -151,7 +163,7 @@ Extracts data for a named field from a  `<form>`'s `.elements` collection.
 
 Options are as documented for `getFormData`.
 
-#### Return type: `null|String|Array.<String>|File|Array.<File>`
+#### Return type: `null | boolean | string | string[] | File | File[]`
 
 This function is used by `getFormData()`, so the documentation for individual return values above also applies.
 

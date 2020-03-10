@@ -133,7 +133,7 @@ test('README example - getFormData', t => {
     product: '1',
     quantity: '9',
     shipping: 'express',
-    tos: 'Y'
+    tos: true
   }, `Data: ${JSON.stringify(data)}`)
 })
 
