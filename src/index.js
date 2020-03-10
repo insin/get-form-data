@@ -117,7 +117,7 @@ export function getFieldData(form, fieldName, options = {trim: false}) {
 
 /**
  * @param {HTMLElement} element a form element.
- * @param {booleam} trim should values for text entry inputs be trimmed?
+ * @param {boolean} trim should values for text entry inputs be trimmed?
  * @return {(string|Array.<string>|File|Array.<File>)} the element's submittable
  *   value(s), or null if it had none.
  */
