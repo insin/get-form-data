@@ -14,6 +14,7 @@ test('getFormData', t => {
     checkOneMultipleCheckbox: ['3'],
     checkTwoMultipleCheckbox: ['1', '3'],
     checkedCheckbox: 'checkedCheckbox',
+    noValueCheckedCheckbox: true,
     checkedRadio: '2',
     hiddenInput: 'hiddenInput',
     partiallyDisabledMultipleCheckbox: ['3'],

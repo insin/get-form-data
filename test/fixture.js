@@ -11,6 +11,8 @@ export default `<form id="testForm" autocomplete="off">
 
   <input type="checkbox" name="uncheckedCheckbox" value="uncheckedCheckbox">
   <input type="checkbox" name="checkedCheckbox" value="checkedCheckbox" checked>
+  <input type="checkbox" name="noValueUncheckedCheckbox">
+  <input type="checkbox" name="noValueCheckedCheckbox" checked>
 
   <textarea name="textarea">textarea</textarea>
   <textarea name="textareaDisabled" disabled>textareaDisabled</textarea>

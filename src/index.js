@@ -165,7 +165,12 @@ function getFormElementValue(element, trim) {
     value = (trim ? element.value.replace(TRIM_RE, '') : element.value)
   }
   else if (element.checked) {
-    value = element.value
+    if (type === 'checkbox' && !element.hasAttribute('value')) {
+      value = true
+    }
+    else {
+      value = element.value
+    }
   }
 
   return value
