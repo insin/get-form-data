@@ -29,9 +29,15 @@ const {toString} = Object.prototype
  *   submittable value(s) held in the form's .elements collection, with
  *   properties named as per element names or ids.
  */
-export default function getFormData(form, options = {trim: false}) {
+export default function getFormData(form, options) {
   if (!form) {
     throw new Error(`A form is required by getFormData, was given form=${form}`)
+  }
+
+  options = {
+    includeDisabled: false,
+    trim: false,
+    ...options
   }
 
   let data = {}
@@ -42,7 +48,7 @@ export default function getFormData(form, options = {trim: false}) {
   // Get unique submittable element names for the form
   for (let i = 0, l = form.elements.length; i < l; i++) {
     let element = form.elements[i]
-    if (IGNORED_ELEMENT_TYPES[element.type] || element.disabled) {
+    if (IGNORED_ELEMENT_TYPES[element.type] || (element.disabled && !options.includeDisabled)) {
       continue
     }
     elementName = element.name || element.id
@@ -73,7 +79,7 @@ export default function getFormData(form, options = {trim: false}) {
  *   named element from its .elements collection, or null if there was no
  *   element with that name or the element had no submittable value(s).
  */
-export function getFieldData(form, fieldName, options = {trim: false}) {
+export function getFieldData(form, fieldName, options) {
   if (!form) {
     throw new Error(`A form is required by getFieldData, was given form=${form}`)
   }
@@ -81,8 +87,14 @@ export function getFieldData(form, fieldName, options = {trim: false}) {
     throw new Error(`A field name is required by getFieldData, was given fieldName=${fieldName}`)
   }
 
+  options = {
+    includeDisabled: false,
+    trim: false,
+    ...options
+  }
+
   let element = form.elements[fieldName]
-  if (!element || element.disabled) {
+  if (!element || (element.disabled && !options.includeDisabled)) {
     return null
   }
 
@@ -94,7 +106,7 @@ export function getFieldData(form, fieldName, options = {trim: false}) {
   let data = []
   let allRadios = true
   for (let i = 0, l = element.length; i < l; i++) {
-    if (element[i].disabled) {
+    if (element[i].disabled && !options.includeDisabled) {
       continue
     }
     if (allRadios && element[i].type !== 'radio') {

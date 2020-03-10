@@ -96,6 +96,35 @@ test('trim option', t => {
           'getFieldData doesn\'t trim non-text inputs with {trim: true}')
 })
 
+test('includeDisabled option', t => {
+  t.plan(1)
+
+  let form = document.querySelector('#testForm')
+
+  t.deepEqual(getFormData(form, {includeDisabled: true}), {
+    checkOneMultipleCheckbox: ['3'],
+    checkTwoMultipleCheckbox: ['1', '3'],
+    disabledMultipleCheckbox: ['1', '3'],
+    checkedCheckbox: 'checkedCheckbox',
+    noValueCheckedCheckbox: true,
+    checkedRadio: '2',
+    radioDisabled: '2',
+    hiddenInput: 'hiddenInput',
+    hiddenInputDisabled: 'hiddenInputDisabled',
+    partiallyDisabledMultipleCheckbox: ['1', '3'],
+    selectedSelect: '2',
+    selectedDisabled: '2',
+    selectOneSelectMultiple: ['3'],
+    selectTwoSelectMultiple: ['1', '3'],
+    selectMultipleDisabled: ['1', '3'],
+    textarea: 'textarea',
+    textareaDisabled: 'textareaDisabled',
+    textInput: 'textInput',
+    textInputDisabled: 'textInputDisabled',
+    unselectedSelect: ''
+  }, 'disabled inputs included')
+})
+
 test('README example - getFormData', t => {
   t.plan(1)
   let form = document.querySelector('#productForm')
