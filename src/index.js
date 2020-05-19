@@ -176,9 +176,9 @@ function getFormElementValue(element, trim) {
   if (!CHECKED_INPUT_TYPES[type]) {
     value = (trim ? element.value.replace(TRIM_RE, '') : element.value)
   }
-  else if (element.checked) {
+  else if (element.checked !== undefined) {
     if (type === 'checkbox' && !element.hasAttribute('value')) {
-      value = true
+      value = element.checked
     }
     else {
       value = element.value
